@@ -1,0 +1,9 @@
+node_modules/
+backend/node_modules/
+admin_pannel/node_modules/
+
+.env
+dist
+.next
+.env.example
+.env*
