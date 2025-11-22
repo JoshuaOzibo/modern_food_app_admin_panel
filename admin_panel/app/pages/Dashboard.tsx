@@ -1,5 +1,5 @@
-import DashboardLayout from "@/components/DashboardLayout";
-import StatsCard from "@/components/StatsCard";
+import DashboardLayout from "@/component/DashboardLayout";
+import StatsCard from "@/component/StatsCard";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";

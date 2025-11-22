@@ -1,4 +1,5 @@
-import DashboardLayout from "@/components/DashboardLayout";
+import DashboardLayout from "@/component/DashboardLayout";
+import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
