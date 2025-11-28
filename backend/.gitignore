@@ -7,3 +7,4 @@ dist
 .next
 .env.example
 .env*
+/plan.plan.md

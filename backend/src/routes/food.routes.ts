@@ -1,0 +1,35 @@
+import { Router } from 'express';
+import {
+  getAllFoodsHandler,
+  getTopRatedFoodsHandler,
+  getPopularFoodsHandler,
+  getFoodByIdHandler,
+  createFoodHandler,
+  updateFoodHandler,
+  deleteFoodHandler,
+} from '../controllers/food.controller.js';
+
+const router = Router();
+
+// GET /api/foods
+router.get('/', getAllFoodsHandler);
+
+// GET /api/foods/top-rated
+router.get('/top-rated', getTopRatedFoodsHandler);
+
+// GET /api/foods/popular
+router.get('/popular', getPopularFoodsHandler);
+
+// GET /api/foods/:id
+router.get('/:id', getFoodByIdHandler);
+
+// POST /api/foods
+router.post('/', createFoodHandler);
+
+// PUT /api/foods/:id
+router.put('/:id', updateFoodHandler);
+
+// DELETE /api/foods/:id
+router.delete('/:id', deleteFoodHandler);
+
+export default router;
