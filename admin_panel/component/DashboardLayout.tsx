@@ -52,7 +52,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     }, []);
 
     return (
-        <div className="min-h-screen w-full flex bg-background">
+        <div className="min-h-screen w-full animate-fade-in flex bg-background">
             {/* Sidebar */}
             <aside
                 className={cn(
@@ -133,7 +133,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 )}
             >
                 {/* Top bar */}
-                <header className="sticky top-0 z-30 h-16 border-b border-border bg-card/80 backdrop-blur-sm">
+                <header className="sticky top-0 animate-fade-in z-30 h-16 border-b border-border bg-card/80 backdrop-blur-sm">
                     <div className="flex h-full items-center justify-between px-6">
                         {/* Search */}
                         <div className="flex-1 max-w-md">
@@ -163,7 +163,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 </header>
 
                 {/* Page content */}
-                <main className="flex-1 overflow-auto p-6">{children}</main>
+                <main className="flex-1 overflow-auto p-6 animate-fade-in">{children}</main>
             </div>
         </div>
     );
