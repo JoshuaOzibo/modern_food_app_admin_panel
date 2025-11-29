@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { AppError } from '../utils/errors.js';
-import { ApiResponse } from '../utils/apiResponse.js';
+import { AppError } from '../utils/errors';
+import { ApiResponse } from '../utils/apiResponse';
 
 export interface ErrorResponse extends ApiResponse {
   stack?: string;

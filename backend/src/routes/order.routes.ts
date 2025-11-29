@@ -2,7 +2,7 @@ import { Router } from 'express';
 import {
   createOrderHandler,
   getOrdersByUserIdHandler,
-} from '../controllers/order.controller.js';
+} from '../controllers/order.controller';
 
 const router = Router();
 

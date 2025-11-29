@@ -1,6 +1,6 @@
-import supabase from '../config/supabase.js';
-import { Food, CreateFoodRequest, UpdateFoodRequest, PaginationParams, PaginatedResponse } from '../types/index.js';
-import { NotFoundError, ValidationError } from '../utils/errors.js';
+import supabase from '../config/supabase';
+import { Food, CreateFoodRequest, UpdateFoodRequest, PaginationParams, PaginatedResponse } from '../types/index';
+import { NotFoundError, ValidationError } from '../utils/errors';
 import { randomUUID } from 'crypto';
 
 // Helper function to convert string to array
@@ -170,7 +170,7 @@ export async function updateFood(id: string, foodData: UpdateFoodRequest): Promi
   }
 
   // Normalize arrays if provided
-  const updateData: Partial<Food> = { ...foodData };
+  const updateData: Partial<Food> = { ...foodData } as Partial<Food>;
   if (foodData.ingredients !== undefined) {
     updateData.ingredients = normalizeArray(foodData.ingredients);
   }

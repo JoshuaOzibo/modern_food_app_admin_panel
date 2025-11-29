@@ -1,7 +1,7 @@
-import supabase from '../config/supabase.js';
-import { Order, CreateOrderRequest } from '../types/index.js';
-import { NotFoundError, ValidationError } from '../utils/errors.js';
-import { getFoodById } from './food.service.js';
+import supabase from '../config/supabase';
+import { Order, CreateOrderRequest } from '../types/index';
+import { NotFoundError, ValidationError } from '../utils/errors';
+import { getFoodById } from './food.service';
 import { randomUUID } from 'crypto';
 
 // Create order

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { createOrder, getOrdersByUserId } from '../services/order.service.js';
-import { sendSuccess, sendError } from '../utils/apiResponse.js';
+import { createOrder, getOrdersByUserId } from '../services/order.service';
+import { sendSuccess, sendError } from '../utils/apiResponse';
 
 // POST /api/orders
 export async function createOrderHandler(

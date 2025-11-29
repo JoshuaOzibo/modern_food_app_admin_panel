@@ -7,9 +7,9 @@ import {
   createFood,
   updateFood,
   deleteFood,
-} from '../services/food.service.js';
-import { sendSuccess, sendError } from '../utils/apiResponse.js';
-import { AppError } from '../utils/errors.js';
+} from '../services/food.service';
+import { sendSuccess, sendError } from '../utils/apiResponse';
+import { AppError } from '../utils/errors';
 
 // GET /api/foods
 export async function getAllFoodsHandler(

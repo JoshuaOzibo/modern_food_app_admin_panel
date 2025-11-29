@@ -2,13 +2,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
-import app from './app.js';
+import app from './app';
 
-console.log(process.env.SUPABASE_KEY);
+// console.log(process.env.SUPABASE_KEY);
 const PORT = process.env.PORT || 5000;
 
 const server = app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT} http://localhost:${PORT}`);
 });
 
 process.on('SIGTERM', () => {

@@ -7,7 +7,7 @@ import {
   createFoodHandler,
   updateFoodHandler,
   deleteFoodHandler,
-} from '../controllers/food.controller.js';
+} from '../controllers/food.controller';
 
 const router = Router();
 

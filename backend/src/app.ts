@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
-import foodRoutes from './routes/food.routes.js';
-import orderRoutes from './routes/order.routes.js';
-import { errorHandler } from './middleware/errorHandler.js';
+import foodRoutes from './routes/food.routes';
+import orderRoutes from './routes/order.routes';
+import { errorHandler } from './middleware/errorHandler';
 
 const app = express();
 
