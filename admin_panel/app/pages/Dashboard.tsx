@@ -72,7 +72,7 @@ export default function Dashboard() {
           <div>
             <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
             <p className="text-muted-foreground mt-1">
-              Welcome back, Joshua! Here's what's happening today.
+              Welcome back, Joshua! Here&apos;s what&apos;s happening today.
             </p>
           </div>
           <Button className="gradient-orange hover:opacity-90 transition-opacity">

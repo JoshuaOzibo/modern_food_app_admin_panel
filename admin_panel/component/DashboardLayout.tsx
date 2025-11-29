@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import {
     LayoutDashboard,
     ShoppingBag,
@@ -18,7 +18,6 @@ import { NavLink } from "../component/NavLink";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface DashboardLayoutProps {
@@ -36,7 +35,21 @@ const navigation = [
 ];
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
-    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+            if (window.innerWidth < 768) {
+                setSidebarOpen(false);
+            }
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     return (
         <div className="min-h-screen w-full flex bg-background">
@@ -44,7 +57,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             <aside
                 className={cn(
                     "fixed left-0 top-0 z-40 h-screen transition-all duration-300 border-r border-border bg-card",
-                    sidebarOpen ? "w-64" : "w-20"
+                    "w-20",
+                    !isMobile && sidebarOpen && "md:w-64"
                 )}
             >
                 <div className="flex h-full flex-col">
@@ -67,7 +81,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                             {sidebarOpen ? (
                                 <ChevronLeft className="w-5 h-5" />
                             ) : (
-                                <Menu className="w-5 h-5" />
+                                <Menu className="w-5 h-5 md:flex hidden" />
                             )}
                         </Button>
                     </div>
@@ -113,7 +127,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             <div
                 className={cn(
                     "flex-1 flex flex-col transition-all duration-300",
-                    sidebarOpen ? "ml-64" : "ml-20"
+                    // Mobile: always ml-20, Desktop: toggle based on sidebarOpen
+                    "ml-20",
+                    !isMobile && sidebarOpen && "md:ml-64"
                 )}
             >
                 {/* Top bar */}
