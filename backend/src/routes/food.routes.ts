@@ -8,6 +8,7 @@ import {
   updateFoodHandler,
   deleteFoodHandler,
 } from '../controllers/food.controller';
+import { uploadSingle } from '../middleware/upload';
 
 const router = Router();
 
@@ -23,11 +24,11 @@ router.get('/popular', getPopularFoodsHandler);
 // GET /api/foods/:id
 router.get('/:id', getFoodByIdHandler);
 
-// POST /api/foods
-router.post('/', createFoodHandler);
+// POST /api/foods (with image upload middleware)
+router.post('/', uploadSingle, createFoodHandler);
 
-// PUT /api/foods/:id
-router.put('/:id', updateFoodHandler);
+// PUT /api/foods/:id (with image upload middleware)
+router.put('/:id', uploadSingle, updateFoodHandler);
 
 // DELETE /api/foods/:id
 router.delete('/:id', deleteFoodHandler);

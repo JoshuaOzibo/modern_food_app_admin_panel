@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { AppError } from '../utils/errors';
 import { ApiResponse } from '../utils/apiResponse';
+import multer from 'multer';
 
 export interface ErrorResponse extends ApiResponse {
   stack?: string;
@@ -13,6 +14,26 @@ export const errorHandler = (
   next: NextFunction
 ): Response => {
   console.error('Error:', err);
+
+  // Handle multer errors (file upload errors)
+  if (err instanceof multer.MulterError) {
+    let message = 'File upload error';
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      message = 'File size too large. Maximum size is 5MB';
+    } else if (err.code === 'LIMIT_UNEXPECTED_FILE') {
+      message = 'Unexpected file field';
+    } else {
+      message = err.message;
+    }
+    const response: ErrorResponse = {
+      success: false,
+      message: message,
+      data: null,
+      error: message,
+      ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
+    };
+    return res.status(400).json(response);
+  }
 
   // Handle known AppError instances
   if (err instanceof AppError) {

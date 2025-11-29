@@ -9,7 +9,8 @@ import {
   deleteFood,
 } from '../services/food.service';
 import { sendSuccess, sendError } from '../utils/apiResponse';
-import { AppError } from '../utils/errors';
+import { uploadImageToCloudinary } from '../utils/cloudinary';
+import { ValidationError } from '../utils/errors';
 
 // GET /api/foods
 export async function getAllFoodsHandler(
@@ -84,6 +85,25 @@ export async function createFoodHandler(
 ): Promise<void> {
   try {
     const foodData = req.body;
+    
+    // Handle image upload if provided
+    if (req.file) {
+      try {
+        const uploadResult = await uploadImageToCloudinary(
+          req.file.buffer,
+          'foods'
+        );
+        // Set thumbnail to the Cloudinary URL
+        foodData.thumbnail = uploadResult.secure_url;
+      } catch (uploadError) {
+        throw new ValidationError(
+          `Image upload failed: ${uploadError instanceof Error ? uploadError.message : 'Unknown error'}`
+        );
+      }
+    }
+    // If thumbnail is provided as a URL string (for direct URL submission), use it
+    // Otherwise, if no file and no thumbnail URL, thumbnail will be undefined
+    
     const food = await createFood(foodData);
     sendSuccess(res, food, 'Food created successfully', 201);
   } catch (error) {
@@ -105,6 +125,23 @@ export async function updateFoodHandler(
     }
 
     const foodData = req.body;
+
+    // Handle image upload if provided
+    if (req.file) {
+      try {
+        const uploadResult = await uploadImageToCloudinary(
+          req.file.buffer,
+          'foods'
+        );
+        // Set thumbnail to the Cloudinary URL
+        foodData.thumbnail = uploadResult.secure_url;
+      } catch (uploadError) {
+        throw new ValidationError(
+          `Image upload failed: ${uploadError instanceof Error ? uploadError.message : 'Unknown error'}`
+        );
+      }
+    }
+
     const food = await updateFood(id, foodData);
     sendSuccess(res, food, 'Food updated successfully');
   } catch (error) {

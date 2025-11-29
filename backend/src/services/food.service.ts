@@ -122,14 +122,28 @@ export async function createFood(foodData: CreateFoodRequest): Promise<Food> {
     throw new ValidationError('Price must be a positive number');
   }
 
+  // Normalize arrays (handle comma-separated strings)
+  const ingredients = normalizeArray(foodData.ingredients);
+  const measures = normalizeArray(foodData.measures);
+
+  // Auto-generate ID if not provided
   const id = randomUUID();
 
   const food: Food = {
     id,
     name: foodData.name,
     category: foodData.category,
-    price: foodData.price,
+    area: foodData.area,
+    instructions: foodData.instructions,
     thumbnail: foodData.thumbnail,
+    youtube: foodData.youtube,
+    ingredients,
+    measures,
+    quantity: foodData.quantity,
+    rating: foodData.rating,
+    price: foodData.price, // Required field from CreateFoodRequest
+    distance: foodData.distance,
+    reviews: foodData.reviews,
   };
 
   const { data, error } = await supabase
@@ -155,7 +169,14 @@ export async function updateFood(id: string, foodData: UpdateFoodRequest): Promi
     throw new ValidationError('Price must be a positive number');
   }
 
+  // Normalize arrays if provided
   const updateData: Partial<Food> = { ...foodData } as Partial<Food>;
+  if (foodData.ingredients !== undefined) {
+    updateData.ingredients = normalizeArray(foodData.ingredients);
+  }
+  if (foodData.measures !== undefined) {
+    updateData.measures = normalizeArray(foodData.measures);
+  }
 
   const { data, error } = await supabase
     .from('foods')

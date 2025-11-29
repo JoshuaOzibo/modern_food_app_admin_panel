@@ -1,10 +1,20 @@
 // Food interface matching database schema
 export interface Food {
-  id: string;
+  id?: string;
   name: string;
   category: string;
-  price: number;
+  area?: string;
+  instructions?: string;
   thumbnail?: string;
+  youtube?: string;
+  ingredients?: string[];
+  measures?: string[];
+  quantity?: number;
+  rating?: number;
+  price?: number;
+  distance?: string;
+  reviews?: string;
+  created_at?: string;
 }
 
 // Order interface matching database schema
