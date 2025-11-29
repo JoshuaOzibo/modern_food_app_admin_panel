@@ -12,7 +12,6 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ): Response => {
-  // Log error for debugging
   console.error('Error:', err);
 
   // Handle known AppError instances

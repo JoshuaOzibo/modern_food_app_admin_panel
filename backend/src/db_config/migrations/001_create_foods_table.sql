@@ -3,17 +3,8 @@ CREATE TABLE IF NOT EXISTS foods (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name TEXT NOT NULL,
   category TEXT NOT NULL,
-  area TEXT,
-  instructions TEXT,
+  price FLOAT8 NOT NULL,
   thumbnail TEXT,
-  youtube TEXT,
-  ingredients TEXT[],
-  measures TEXT[],
-  quantity INTEGER,
-  rating FLOAT8,
-  price FLOAT8,
-  distance TEXT,
-  reviews TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
