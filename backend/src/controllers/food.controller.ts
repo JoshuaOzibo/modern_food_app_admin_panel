@@ -86,14 +86,12 @@ export async function createFoodHandler(
   try {
     const foodData = req.body;
     
-    // Handle image upload if provided
     if (req.file) {
       try {
         const uploadResult = await uploadImageToCloudinary(
           req.file.buffer,
           'foods'
         );
-        // Set thumbnail to the Cloudinary URL
         foodData.thumbnail = uploadResult.secure_url;
       } catch (uploadError) {
         throw new ValidationError(
@@ -101,9 +99,6 @@ export async function createFoodHandler(
         );
       }
     }
-    // If thumbnail is provided as a URL string (for direct URL submission), use it
-    // Otherwise, if no file and no thumbnail URL, thumbnail will be undefined
-    
     const food = await createFood(foodData);
     sendSuccess(res, food, 'Food created successfully', 201);
   } catch (error) {

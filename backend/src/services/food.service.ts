@@ -122,28 +122,14 @@ export async function createFood(foodData: CreateFoodRequest): Promise<Food> {
     throw new ValidationError('Price must be a positive number');
   }
 
-  // Normalize arrays (handle comma-separated strings)
-  const ingredients = normalizeArray(foodData.ingredients);
-  const measures = normalizeArray(foodData.measures);
-
-  // Auto-generate ID if not provided
   const id = randomUUID();
 
   const food: Food = {
     id,
     name: foodData.name,
     category: foodData.category,
-    area: foodData.area,
-    instructions: foodData.instructions,
     thumbnail: foodData.thumbnail,
-    youtube: foodData.youtube,
-    ingredients,
-    measures,
-    quantity: foodData.quantity,
-    rating: foodData.rating,
-    price: foodData.price, // Required field from CreateFoodRequest
-    distance: foodData.distance,
-    reviews: foodData.reviews,
+    price: foodData.price,
   };
 
   const { data, error } = await supabase
